@@ -28,6 +28,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // Add a CPT
 require_once plugin_dir_path(__FILE__) . 'includes/custom-post-type-repas.php';
 
+load_plugin_textdomain('lur-atable', false, 'lur-atable/languages' );
+
 /*
  *  Add Posts 2 posts core
  */
@@ -63,7 +65,7 @@ function lur_atable_load_p2p_core() {
 function example_connection_types() {
 	p2p_register_connection_type( array(
 		'name' => 'repas_registration',
-		'from' => 'repas',
+		'from' => 'meals',
 		'to' => 'user'
 	) );
 }
@@ -77,8 +79,8 @@ function example_connection_types() {
 function lur_add_meta_repas_to_content( $the_content ){
 	global $post;
 
-	if( is_singular( 'repas') ){
-		$date_repas = get_post_meta( get_the_ID(), 'lur_repas_date', true);
+	if( is_singular( 'meals') ){
+		$date_repas = get_post_meta( get_the_ID(), 'lur_meals_date', true);
 		$date_repas = new DateTime( $date_repas );
 
 		if( $date_repas ){
@@ -110,7 +112,7 @@ function lur_add_meta_repas_to_content( $the_content ){
 						) );
 
 					// Is there a number limit of participant
-					$max_participants = get_post_meta( get_the_ID(), 'lur_repas_max_participants', true);
+					$max_participants = get_post_meta( get_the_ID(), 'lur_meals_max_participants', true);
 
 					$registration_are_open = false;
 					if( $max_participants ){
@@ -204,12 +206,12 @@ function lur_add_meta_repas_to_content( $the_content ){
 }
 add_filter('the_content', 'lur_add_meta_repas_to_content' );
 
-function lur_add_repas_date( $the_title ){
+function lur_add_meals_date( $the_title ){
 	global $post;
 
-	if( $the_title == $post->post_title && get_post_type() == 'repas' ){
+	if( !is_admin() && $the_title == $post->post_title && get_post_type() == 'meals' ){
 
-		$date_repas = get_post_meta( get_the_ID(), 'lur_repas_date', true);
+		$date_repas = get_post_meta( get_the_ID(), 'lur_meals_date', true);
 
 		if( $date_repas ){
 			$the_title = mysql2date( get_option('date_format'), $date_repas ) . ' - ' . $the_title;
@@ -218,7 +220,7 @@ function lur_add_repas_date( $the_title ){
 
 	return $the_title;
 }
-add_filter( 'the_title', 'lur_add_repas_date');
+add_filter( 'the_title', 'lur_add_meals_date');
 
 function register_to_meal( $participant_id, $repas_id ){
 
