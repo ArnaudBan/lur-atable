@@ -76,7 +76,7 @@ function example_connection_types() {
  *
  * filter the_content
  */
-function lur_add_meta_repas_to_content( $the_content ){
+function lur_add_meals_meta_to_content( $the_content ){
 	global $post;
 
 	if( is_singular( 'meals') ){
@@ -91,7 +91,7 @@ function lur_add_meta_repas_to_content( $the_content ){
 				if( isset( $_REQUEST['participant_id'] ) ){
 					register_to_meal( $_REQUEST['participant_id'], get_the_ID() );
 				} elseif( isset( $_REQUEST['conection_id'] ) ){
-					p2p_delete_connection( $_REQUEST['conection_id'] );
+					unregister_to_meal( $_REQUEST['conection_id'] );
 				}
 
 				$registration_display = '';
@@ -204,8 +204,15 @@ function lur_add_meta_repas_to_content( $the_content ){
 
 	return $the_content;
 }
-add_filter('the_content', 'lur_add_meta_repas_to_content' );
+add_filter('the_content', 'lur_add_meals_meta_to_content' );
 
+/**
+ * Add the date in front of the meal title
+ *
+ * @global Object $post
+ * @param string $the_title
+ * @return string
+ */
 function lur_add_meals_date( $the_title ){
 	global $post;
 
@@ -222,6 +229,16 @@ function lur_add_meals_date( $the_title ){
 }
 add_filter( 'the_title', 'lur_add_meals_date');
 
+
+/**
+ * register to a meal
+ *
+ * +1 "meals point" to the author of the meal
+ * -1 "meals point" to the user who is registered
+ *
+ * @param type $participant_id
+ * @param type $repas_id
+ */
 function register_to_meal( $participant_id, $repas_id ){
 
 	$connection_args = array(
@@ -233,7 +250,101 @@ function register_to_meal( $participant_id, $repas_id ){
 		);
 
 	// Don't register twice
-	if( ! p2p_connection_exists( 'repas_registration', $connection_args ) )
+	if( ! p2p_connection_exists( 'repas_registration', $connection_args ) ){
 		p2p_create_connection( 'repas_registration', $connection_args );
 
+		// update user meta
+		$user_meal_points = get_user_meta($participant_id, 'lur_meals_points', true);
+
+		$user_meal_points = $user_meal_points ? ( $user_meal_points - 1) : -1;
+
+		update_user_meta($participant_id, 'lur_meals_points', $user_meal_points);
+
+		// upadte author meta
+		$author_id = get_the_author_meta('ID');
+		$author_meal_points = get_user_meta( $author_id , 'lur_meals_points', true);
+
+		$author_meal_points = $author_meal_points ? ( $author_meal_points + 1 ) : 1;
+
+		update_user_meta( $author_id, 'lur_meals_points', $author_meal_points);
+
+	}
+
+}
+
+
+/**
+ * Unregister user to meal
+ *
+ * -1 "meals point" to the author of the meal
+ * give back 1 "meals point" to the user who is unregistered
+ *
+ * @param int $conection_id
+ */
+function unregister_to_meal( $conection_id ){
+
+	// update user meta
+	$connection = p2p_get_connection( $conection_id );
+	$participant_id = $connection->p2p_to;
+	$user_meal_points = get_user_meta($participant_id, 'lur_meals_points', true);
+
+	$user_meal_points++;
+
+	update_user_meta($participant_id, 'lur_meals_points', $user_meal_points);
+
+	// upadte author meta
+	$author_id = get_the_author_meta('ID');
+	$author_meal_points = get_user_meta( $author_id , 'lur_meals_points', true);
+
+	$author_meal_points--;
+
+	update_user_meta( $author_id, 'lur_meals_points', $author_meal_points);
+
+	// delete the connection
+	p2p_delete_connection( $conection_id );
+}
+
+/**
+ * Add Meals point in the user column
+ */
+add_action('manage_users_columns','lur_atable_add_users_columns');
+add_action('manage_users_custom_column','custom_manage_users_custom_column',10,3);
+
+function lur_atable_add_users_columns($column_headers) {
+	$column_headers['lur_meals_points'] = __( 'Meals Points', 'lur-atable');
+	return $column_headers;
+}
+
+function custom_manage_users_custom_column($custom_column,$column_name,$user_id) {
+	if ($column_name =='lur_meals_points') {
+		$meal_points = get_user_meta( $user_id , 'lur_meals_points', true);
+		$meal_points_count = $meal_points == 0 ? 1 : $meal_points;
+
+		$custom_column = ( $meal_points == '' ) ? __( 'No points yet', 'lur-atable') : sprintf( _n('%d point', '%d points', $meal_points_count,'lur-atable'), $meal_points);
+	}
+	return $custom_column;
+}
+
+/*
+ *  Add Meals points to the user profil
+ */
+add_action( 'show_user_profile', 'lur_atable_add_user_profile_fields' );
+function lur_atable_add_user_profile_fields( $user ){
+	$meal_points = get_user_meta( $user->ID , 'lur_meals_points', true);
+	?>
+	<h3><?php _e('Your meals points', 'lur-atable'); ?></h3>
+	<table class="form-table">
+		<tbody>
+			<tr>
+				<th><?php _e('You have', 'lur-atable'); ?> :</th>
+				<td>
+					<?php
+					$meal_points_count = $meal_points == 0 ? 1 : $meal_points;
+					echo ( $meal_points == '' ) ? __( 'No points yet', 'lur-atable') : sprintf( _n('%d point', '%d points', $meal_points_count,'lur-atable'), $meal_points);
+					?>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<?php
 }
