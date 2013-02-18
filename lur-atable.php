@@ -92,7 +92,7 @@ function example_connection_types() {
 function lur_add_meals_meta_to_content( $the_content ){
 	global $post;
 
-	if( is_singular( 'meals') ){
+	if( get_post_type() == 'meals' ){
 		$date_repas = get_post_meta( get_the_ID(), 'lur_meals_date', true);
 		$date_repas = new DateTime( $date_repas );
 
@@ -104,15 +104,6 @@ function lur_add_meals_meta_to_content( $the_content ){
 					'connected_items'   => $post,
 					'connected_orderby' => 'registration-date',
 				) );
-
-			// Display the number of participants
-			if( isset( $participants ) && !empty( $participants ) ){
-				$the_content = '<p>'
-												. sprintf( _n('Only one participant', '%d participants so far', count($participants), 'lur-atable'), count($participants) ).
-											'</p>'. $the_content ;
-			} else {
-				$the_content .= '<p>' . __('No on yet') . '</p>' . $the_content;
-			}
 
 			// if a user is login we may propose to register
 			if( is_user_logged_in() ){
@@ -221,23 +212,7 @@ function lur_add_meals_meta_to_content( $the_content ){
 				$the_content .= $registration_display;
 			}
 		}
-
-
-	// end if is_singular('repas')
-	} elseif(is_post_type_archive('meals') ){
-		$participants = get_users( array(
-							'connected_type'    => 'repas_registration',
-							'connected_items'   => $post
-				) );
-		if( isset( $participants ) && !empty( $participants ) ){
-			$the_content = '<p>'
-											. sprintf( _n('Only one participant', '%d participants so far', count($participants), 'lur-atable'), count($participants) ).
-										'</p>'. $the_content ;
-		} else {
-			$the_content = '<p>' . __('No on yet') . '</p>' . $the_content;
-		}
-
-	}
+	} // end if is_singular('repas')
 
 	return $the_content;
 }
