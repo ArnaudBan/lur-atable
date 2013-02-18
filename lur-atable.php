@@ -28,7 +28,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // Add a CPT
 require_once plugin_dir_path(__FILE__) . 'includes/custom-post-type-repas.php';
 
+
+// translate the plugin
 load_plugin_textdomain('lur-atable', false, 'lur-atable/languages' );
+
+
+// Add Widget
+require_once plugin_dir_path(__FILE__) . 'widgets/next-meals.php';
+add_action( 'widgets_init', create_function( '', 'register_widget( "Lur_next_meals_Widget" );' ) );
 
 /*
  *  Add Posts 2 posts core
@@ -100,7 +107,7 @@ function lur_add_meals_meta_to_content( $the_content ){
 			} else {
 				$the_content .= '<p>' . __('No on yet') . '</p>' . $the_content;
 			}
-			
+
 			// if a user is login we may propose to register
 			if( is_user_logged_in() ){
 
