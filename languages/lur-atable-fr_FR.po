@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LUR aTable\n"
-"POT-Creation-Date: 2013-02-17 12:24+0100\n"
-"PO-Revision-Date: 2013-02-17 12:27+0100\n"
+"POT-Creation-Date: 2013-02-18 19:05+0100\n"
+"PO-Revision-Date: 2013-02-18 19:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: LUR\n"
 "MIME-Version: 1.0\n"
@@ -15,57 +15,67 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../lur-atable.php:103
+#: ../lur-atable.php:98 ../lur-atable.php:221
+#, php-format
+msgid "Only one participant"
+msgid_plural "%d participants so far"
+msgstr[0] "Seulement un inscrit"
+msgstr[1] "%d participants pour le moment"
+
+#: ../lur-atable.php:101 ../lur-atable.php:224
+msgid "No on yet"
+msgstr "Personne pour le moment"
+
+#: ../lur-atable.php:119
 msgid "Registration are closed"
 msgstr "Les inscriptions sont closes"
 
-#: ../lur-atable.php:124
+#: ../lur-atable.php:134
 msgid "We are full"
 msgstr "On est plein"
 
-#: ../lur-atable.php:135
+#: ../lur-atable.php:145
 msgid "Register"
 msgstr "S'inscrire"
 
-#: ../lur-atable.php:144
+#: ../lur-atable.php:154
 msgid "Already Registered"
 msgstr "Déja inscrit"
 
-#: ../lur-atable.php:161
+#: ../lur-atable.php:171
 msgid "Registration Date"
 msgstr "date d'inscription"
 
-#: ../lur-atable.php:162
+#: ../lur-atable.php:172
 msgid "participant"
 msgstr "participant"
 
-#: ../lur-atable.php:163 ../lur-atable.php:185
+#: ../lur-atable.php:173 ../lur-atable.php:195
 msgid "Unregister"
 msgstr "Se désinscrire"
 
-#: ../lur-atable.php:314
-#, fuzzy
+#: ../lur-atable.php:338
 msgid "Meals Points"
-msgstr "Information sur le repas"
+msgstr "points repas"
 
-#: ../lur-atable.php:321 ../lur-atable.php:341
+#: ../lur-atable.php:347 ../lur-atable.php:367
 msgid "No points yet"
 msgstr "Pas encore de points"
 
-#: ../lur-atable.php:333
-msgid "Your meals points"
-msgstr "Tes points repas"
-
-#: ../lur-atable.php:337
-msgid "You have"
-msgstr "Tu as"
-
-#: ../lur-atable.php:341
+#: ../lur-atable.php:347 ../lur-atable.php:367
 #, php-format
 msgid "%d point"
 msgid_plural "%d points"
 msgstr[0] "%d point"
 msgstr[1] "%d points"
+
+#: ../lur-atable.php:359
+msgid "Your meals points"
+msgstr "Tes points repas"
+
+#: ../lur-atable.php:363
+msgid "You have"
+msgstr "Tu as"
 
 #: ../includes/custom-post-type-repas.php:13
 #: ../includes/custom-post-type-repas.php:24
@@ -146,7 +156,7 @@ msgstr ""
 
 #: ../p2p-core/extra.php:34
 msgid "Title:"
-msgstr ""
+msgstr "Titre:"
 
 #: ../p2p-core/extra.php:41
 msgid "Connection type:"

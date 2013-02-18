@@ -85,6 +85,22 @@ function lur_add_meals_meta_to_content( $the_content ){
 
 		if( $date_repas ){
 
+			// Get the participants
+			$participants = get_users( array(
+					'connected_type'    => 'repas_registration',
+					'connected_items'   => $post,
+					'connected_orderby' => 'registration-date',
+				) );
+
+			// Display the number of participants
+			if( isset( $participants ) && !empty( $participants ) ){
+				$the_content = '<p>'
+												. sprintf( _n('Only one participant', '%d participants so far', count($participants), 'lur-atable'), count($participants) ).
+											'</p>'. $the_content ;
+			} else {
+				$the_content .= '<p>' . __('No on yet') . '</p>' . $the_content;
+			}
+			
 			// if a user is login we may propose to register
 			if( is_user_logged_in() ){
 
@@ -104,12 +120,6 @@ function lur_add_meals_meta_to_content( $the_content ){
 
 				} else{
 
-					// Get the participants
-					$participants = get_users( array(
-							'connected_type'    => 'repas_registration',
-							'connected_items'   => $post,
-							'connected_orderby' => 'registration-date',
-						) );
 
 					// Is there a number limit of participant
 					$max_participants = get_post_meta( get_the_ID(), 'lur_meals_max_participants', true);
@@ -200,7 +210,21 @@ function lur_add_meals_meta_to_content( $the_content ){
 		}
 
 
-	} // end if is_singular('repas')
+	// end if is_singular('repas')
+	} elseif(is_post_type_archive('meals') ){
+		$participants = get_users( array(
+							'connected_type'    => 'repas_registration',
+							'connected_items'   => $post
+				) );
+		if( isset( $participants ) && !empty( $participants ) ){
+			$the_content = '<p>'
+											. sprintf( _n('Only one participant', '%d participants so far', count($participants), 'lur-atable'), count($participants) ).
+										'</p>'. $the_content ;
+		} else {
+			$the_content .= '<p>' . __('No on yet') . '</p>' . $the_content;
+		}
+
+	}
 
 	return $the_content;
 }
@@ -216,7 +240,7 @@ add_filter('the_content', 'lur_add_meals_meta_to_content' );
 function lur_add_meals_date( $the_title ){
 	global $post;
 
-	if( !is_admin() && $the_title == $post->post_title && get_post_type() == 'meals' ){
+	if( !is_admin() && !empty( $post ) && $the_title == $post->post_title && get_post_type() == 'meals' ){
 
 		$date_repas = get_post_meta( get_the_ID(), 'lur_meals_date', true);
 
