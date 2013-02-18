@@ -234,7 +234,7 @@ function lur_add_meals_meta_to_content( $the_content ){
 											. sprintf( _n('Only one participant', '%d participants so far', count($participants), 'lur-atable'), count($participants) ).
 										'</p>'. $the_content ;
 		} else {
-			$the_content .= '<p>' . __('No on yet') . '</p>' . $the_content;
+			$the_content = '<p>' . __('No on yet') . '</p>' . $the_content;
 		}
 
 	}
@@ -385,3 +385,21 @@ function lur_atable_add_user_profile_fields( $user ){
 	</table>
 	<?php
 }
+
+// Meals are order by meals date
+function lur_meals_orderby_meals_date( $query ) {
+
+	if ( $query->is_main_query() && is_post_type_archive('meals') ) {
+		// dont display old meals
+		$meta_query = array(
+										'key'     => 'lur_meals_date',
+										'value'   => date('Y-m-d'),
+										'compare' => '>=',
+									);
+		$query->set( 'meta_key', 'lur_meals_date' );
+		$query->set( 'orderby', 'meta_value' );
+		$query->set( 'order', 'ASC' );
+		$query->set( 'meta_query', array( $meta_query ) );
+	}
+}
+add_action( 'pre_get_posts', 'lur_meals_orderby_meals_date' );

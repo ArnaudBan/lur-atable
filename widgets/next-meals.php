@@ -42,7 +42,15 @@ class Lur_next_meals_Widget extends WP_Widget {
 												'meta_key'       => 'lur_meals_date',
 												'orderby'        => 'meta_value',
 												'order'          => 'ASC',
-												'posts_per_page' => $instance['nb_meals']
+												'posts_per_page' => $instance['nb_meals'],
+												'meta_query'     => array(
+																							array(
+																									'key'     => 'lur_meals_date',
+																									'value'   => date('Y-m-d'),
+																									'compare' => '>=',
+																								)
+																							),
+
 											);
 
 		$next_meals = new WP_Query( $next_meals_args );
