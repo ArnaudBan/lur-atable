@@ -34,8 +34,14 @@ load_plugin_textdomain('lur-atable', false, 'lur-atable/languages' );
 
 
 // Add Widget
-require_once plugin_dir_path(__FILE__) . 'widgets/next-meals.php';
-add_action( 'widgets_init', create_function( '', 'register_widget( "Lur_next_meals_Widget" );' ) );
+function lur_register_widget(){
+	require_once plugin_dir_path(__FILE__) . 'widgets/next-meals.php';
+	require_once plugin_dir_path(__FILE__) . 'widgets/all-users.php';
+	register_widget( "Lur_next_meals_Widget" );
+	register_widget( "Lur_All_Users_Widget" );
+}
+add_action( 'widgets_init', 'lur_register_widget');
+
 
 /*
  *  Add Posts 2 posts core
