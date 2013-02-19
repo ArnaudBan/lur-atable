@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LUR aTable\n"
-"POT-Creation-Date: 2013-02-18 22:41+0100\n"
-"PO-Revision-Date: 2013-02-18 22:43+0100\n"
+"POT-Creation-Date: 2013-02-19 22:04+0100\n"
+"PO-Revision-Date: 2013-02-19 22:05+0100\n"
 "Last-Translator: \n"
 "Language-Team: LUR\n"
 "MIME-Version: 1.0\n"
@@ -15,65 +15,67 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../lur-atable.php:111 ../lur-atable.php:234
+#: ../lur-atable.php:123
 #, php-format
-msgid "Only one participant"
-msgid_plural "%d participants so far"
-msgstr[0] "Seulement un inscrit"
-msgstr[1] "%d participants pour le moment"
+msgid "%1$s of %2$s participant maximum"
+msgid_plural "%1$s of %2$s participants maximum"
+msgstr[0] "%1$s participant sur %2$s maximum"
+msgstr[1] "%1$s participants sur %2$s maximum"
 
-#: ../lur-atable.php:114 ../lur-atable.php:237
-msgid "No on yet"
-msgstr "Personne pour le moment"
+#: ../lur-atable.php:128 ../lur-atable.php:204
+msgid "participant"
+msgid_plural "participants"
+msgstr[0] "participant"
+msgstr[1] "participants"
 
-#: ../lur-atable.php:132
+#: ../lur-atable.php:147
 msgid "Registration are closed"
 msgstr "Les inscriptions sont closes"
 
-#: ../lur-atable.php:147
+#: ../lur-atable.php:159
 msgid "We are full"
 msgstr "On est plein"
 
-#: ../lur-atable.php:158
+#: ../lur-atable.php:168
+msgid "You are the Author"
+msgstr ""
+
+#: ../lur-atable.php:175
 msgid "Register"
 msgstr "S'inscrire"
 
-#: ../lur-atable.php:167
+#: ../lur-atable.php:184
 msgid "Already Registered"
 msgstr "Déja inscrit"
 
-#: ../lur-atable.php:184
+#: ../lur-atable.php:203
 msgid "Registration Date"
 msgstr "date d'inscription"
 
-#: ../lur-atable.php:185
-msgid "participant"
-msgstr "participant"
-
-#: ../lur-atable.php:186 ../lur-atable.php:208
+#: ../lur-atable.php:205 ../lur-atable.php:227
 msgid "Unregister"
 msgstr "Se désinscrire"
 
-#: ../lur-atable.php:351 ../widgets/all-users.php:50
+#: ../lur-atable.php:353 ../widgets/all-users.php:50
 msgid "Meals Points"
 msgstr "points repas"
 
-#: ../lur-atable.php:360 ../lur-atable.php:380
+#: ../lur-atable.php:362 ../lur-atable.php:382 ../widgets/all-users.php:59
 msgid "No points yet"
 msgstr "Pas encore de points"
 
-#: ../lur-atable.php:360 ../lur-atable.php:380
+#: ../lur-atable.php:362 ../lur-atable.php:382
 #, php-format
 msgid "%d point"
 msgid_plural "%d points"
 msgstr[0] "%d point"
 msgstr[1] "%d points"
 
-#: ../lur-atable.php:372
+#: ../lur-atable.php:374
 msgid "Your meals points"
 msgstr "Tes points repas"
 
-#: ../lur-atable.php:376
+#: ../lur-atable.php:378
 msgid "You have"
 msgstr "Tu as"
 
@@ -215,7 +217,7 @@ msgstr "aTable Tous les participants"
 msgid "Display all the users and their meals points"
 msgstr "Affiche tout les participants et leur points repas"
 
-#: ../widgets/all-users.php:102 ../widgets/next-meals.php:105
+#: ../widgets/all-users.php:102 ../widgets/next-meals.php:113
 msgid "Title"
 msgstr "Titre"
 
@@ -227,10 +229,18 @@ msgstr "aTable Prochain Repas"
 msgid "Display the next meals to come"
 msgstr "Affiches les prochains repas"
 
-#: ../widgets/next-meals.php:100
+#: ../widgets/next-meals.php:108
 msgid "next Meals"
 msgstr "Prochains Repas"
 
-#: ../widgets/next-meals.php:109
+#: ../widgets/next-meals.php:117
 msgid "Number of meals to display"
 msgstr "Nombre de repas à afficher"
+
+#~ msgid "Only one participant"
+#~ msgid_plural "%d participants so far"
+#~ msgstr[0] "Seulement un inscrit"
+#~ msgstr[1] "%d participants pour le moment"
+
+#~ msgid "No on yet"
+#~ msgstr "Personne pour le moment"

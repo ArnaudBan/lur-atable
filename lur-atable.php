@@ -94,6 +94,12 @@ function lur_add_meals_meta_to_content( $the_content ){
 
 	if( get_post_type() == 'meals' ){
 
+		// Deal with registration and unregistration if there is a need to
+		if( isset( $_REQUEST['participant_id'] ) ){
+			register_to_meal( $_REQUEST['participant_id'], get_the_ID() );
+		} elseif( isset( $_REQUEST['conection_id'] ) ){
+			unregister_to_meal( $_REQUEST['conection_id'] );
+		}
 		// Get the date
 		$date_repas = get_post_meta( get_the_ID(), 'lur_meals_date', true);
 		$date_repas = new DateTime( $date_repas );
@@ -108,21 +114,31 @@ function lur_add_meals_meta_to_content( $the_content ){
 				'connected_orderby' => 'registration-date',
 			) );
 
-		if( $date_repas ){
+		// Show the nuber of participants
+		$nb_participant_string = '<p>';
 
-			// Show the nuber of participants
-			//$the_content .= __('they are ') . count($participants) . ' on ' . $max_participants . ' so far';
+		$nb_participant_for_n_translation = count($participants) == 0 ? 1 : count($participants);
+
+		if( $max_participants ){
+			$nb_participant_string .= sprintf( _n('%1$s of %2$s participant maximum', '%1$s of %2$s participants maximum', $nb_participant_for_n_translation, 'lur-atable'),
+																	'<strong>' . count($participants) . '</strong>',
+																	'<strong>' . $max_participants . '</strong>'
+																);
+		} else {
+			$nb_participant_string .= '<strong>' . count($participants) . '</strong> '. _n('participant', 'participants', $nb_participant_for_n_translation, 'lur-atable');
+		}
+
+		$nb_participant_string .= '</p>';
+
+		$the_content .= $nb_participant_string;
+
+		// Initialisation a variable
+		$registration_display = '';
+
+		if( $date_repas ){
 
 			// if a user is login we may propose to register
 			if( is_user_logged_in() ){
-
-				if( isset( $_REQUEST['participant_id'] ) ){
-					register_to_meal( $_REQUEST['participant_id'], get_the_ID() );
-				} elseif( isset( $_REQUEST['conection_id'] ) ){
-					unregister_to_meal( $_REQUEST['conection_id'] );
-				}
-
-				$registration_display = '';
 
 				// If the date is to close or past, the registration are close
 				$today = new DateTime('now');
