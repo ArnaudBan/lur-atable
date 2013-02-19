@@ -93,17 +93,25 @@ function lur_add_meals_meta_to_content( $the_content ){
 	global $post;
 
 	if( get_post_type() == 'meals' ){
+
+		// Get the date
 		$date_repas = get_post_meta( get_the_ID(), 'lur_meals_date', true);
 		$date_repas = new DateTime( $date_repas );
 
+		// Get the number max of participants
+		$max_participants = get_post_meta( get_the_ID(), 'lur_meals_max_participants', true);
+
+		// Get the participants
+		$participants = get_users( array(
+				'connected_type'    => 'repas_registration',
+				'connected_items'   => $post,
+				'connected_orderby' => 'registration-date',
+			) );
+
 		if( $date_repas ){
 
-			// Get the participants
-			$participants = get_users( array(
-					'connected_type'    => 'repas_registration',
-					'connected_items'   => $post,
-					'connected_orderby' => 'registration-date',
-				) );
+			// Show the nuber of participants
+			//$the_content .= __('they are ') . count($participants) . ' on ' . $max_participants . ' so far';
 
 			// if a user is login we may propose to register
 			if( is_user_logged_in() ){
@@ -124,11 +132,8 @@ function lur_add_meals_meta_to_content( $the_content ){
 
 				} else{
 
-
-					// Is there a number limit of participant
-					$max_participants = get_post_meta( get_the_ID(), 'lur_meals_max_participants', true);
-
 					$registration_are_open = false;
+
 					if( $max_participants ){
 
 						// Can we add mor participants
@@ -141,6 +146,11 @@ function lur_add_meals_meta_to_content( $the_content ){
 					// No number limit of participants, registration are open !
 					} else {
 						$registration_are_open = true;
+					}
+
+					if( get_current_user_id() == get_the_author_meta('ID') ){
+						$registration_display .= __('You are the Author', 'lur-atable');
+						$registration_are_open = false;
 					}
 
 					// if we can register lets show the registration form
@@ -159,58 +169,59 @@ function lur_add_meals_meta_to_content( $the_content ){
 							$disabled = true;
 						}
 
-						$registration_display .= '<form method="post">';
+						$registration_display .= '<p><form method="post">';
 						$registration_display .= '<input type="hidden" name="participant_id" value="'. get_current_user_id() .'">';
 						$registration_display .= '<input type="submit" value="'. $submit_value .'" '. disabled( $disabled, true, false ) .'>';
-						$registration_display .= '</form>';
-					}
-
-					// Any way we show teh participants liste
-					if (is_array($participants) && ! empty( $participants )) {
-
-						$registration_display .= '
-						<table>
-							<thead>
-								<tr>
-									<th>'. __('Registration Date', 'lur-atable') .'</th>
-									<th>'. __('participant', 'lur-atable') .'</th>
-									<th>'. __('Unregister', 'lur-atable') .'</th>
-								</tr>
-							</thead>
-							<tbody>';
-
-								foreach ( $participants as $participant ){
-									//var_dump($participant);
-									$registration_display .= '
-									<tr>
-										<td>';
-										$registration_date = p2p_get_meta( $participant->p2p_id, 'registration-date', true);
-										if ( $registration_date ){
-											$registration_display .= mysql2date( get_option('date_format') . ' - ' . get_option('time_format') ,$registration_date );
-										}
-										$registration_display .= '
-										</td>
-										<td>' .$participant->display_name .'</td>
-										<td>';
-											// Propose to unregister for the current user
-											if( get_current_user_id() == $participant->ID ){
-													$registration_display .= '<form method="post">';
-													$registration_display .=    '<input type="hidden" name="conection_id" value="'. $participant->p2p_id .'">';
-													$registration_display .=    '<input type="submit" value="'. __('Unregister', 'lur-atable') .'" >';
-													$registration_display .= '</form>';
-											}
-										$registration_display .= '
-										</td>
-									</tr>';
-								}
-								$registration_display .= '
-							</tbody>
-						</table>';
+						$registration_display .= '</form></p>';
 					}
 				}
-
-				$the_content .= $registration_display;
 			}
+
+			// Any way we show the participants liste
+			if (is_array($participants) && ! empty( $participants )) {
+
+				$registration_display .= '
+				<table>
+					<thead>
+						<tr>
+							<th>'. __('Registration Date', 'lur-atable') .'</th>
+							<th>'. __('participant', 'lur-atable') .'</th>
+							<th>'. __('Unregister', 'lur-atable') .'</th>
+						</tr>
+					</thead>
+					<tbody>';
+
+						foreach ( $participants as $participant ){
+							//var_dump($participant);
+							$registration_display .= '
+							<tr>
+								<td>';
+								$registration_date = p2p_get_meta( $participant->p2p_id, 'registration-date', true);
+								if ( $registration_date ){
+									$registration_display .= mysql2date( get_option('date_format') . ' - ' . get_option('time_format') ,$registration_date );
+								}
+								$registration_display .= '
+								</td>
+								<td>' .$participant->display_name .'</td>
+								<td>';
+									// Propose to unregister for the current user
+									if( get_current_user_id() == $participant->ID ){
+											$registration_display .= '<form method="post">';
+											$registration_display .=    '<input type="hidden" name="conection_id" value="'. $participant->p2p_id .'">';
+											$registration_display .=    '<input type="submit" value="'. __('Unregister', 'lur-atable') .'" >';
+											$registration_display .= '</form>';
+									}
+								$registration_display .= '
+								</td>
+							</tr>';
+						}
+						$registration_display .= '
+					</tbody>
+				</table>';
+			}
+
+			$the_content .= $registration_display;
+
 		}
 	} // end if is_singular('repas')
 
