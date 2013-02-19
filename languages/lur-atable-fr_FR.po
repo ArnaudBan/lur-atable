@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LUR aTable\n"
-"POT-Creation-Date: 2013-02-19 22:04+0100\n"
-"PO-Revision-Date: 2013-02-19 22:05+0100\n"
+"POT-Creation-Date: 2013-02-19 22:26+0100\n"
+"PO-Revision-Date: 2013-02-19 22:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: LUR\n"
 "MIME-Version: 1.0\n"
@@ -15,67 +15,75 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../lur-atable.php:123
+#: ../lur-atable.php:118
+msgid "Registration for the meal"
+msgstr "Les inscriptions au repas"
+
+#: ../lur-atable.php:126
 #, php-format
 msgid "%1$s of %2$s participant maximum"
 msgid_plural "%1$s of %2$s participants maximum"
 msgstr[0] "%1$s participant sur %2$s maximum"
 msgstr[1] "%1$s participants sur %2$s maximum"
 
-#: ../lur-atable.php:128 ../lur-atable.php:204
+#: ../lur-atable.php:131 ../lur-atable.php:207
 msgid "participant"
 msgid_plural "participants"
 msgstr[0] "participant"
 msgstr[1] "participants"
 
-#: ../lur-atable.php:147
+#: ../lur-atable.php:150
 msgid "Registration are closed"
 msgstr "Les inscriptions sont closes"
 
-#: ../lur-atable.php:159
-msgid "We are full"
-msgstr "On est plein"
+#: ../lur-atable.php:162
+msgid "Meal is full"
+msgstr "Les repas est complet"
 
-#: ../lur-atable.php:168
-msgid "You are the Author"
-msgstr ""
+#: ../lur-atable.php:172
+msgid "You are the author, the author can not subscribe to his own meal"
+msgstr "Tu es l'auteur, l'auteur ne peut s'inscrire a son propre repas"
 
-#: ../lur-atable.php:175
+#: ../lur-atable.php:183
+msgid "You are already register"
+msgstr "Tu es déja inscrit"
+
+#: ../lur-atable.php:192
+msgid "Tempted"
+msgstr "Tenté"
+
+#: ../lur-atable.php:193
 msgid "Register"
 msgstr "S'inscrire"
 
-#: ../lur-atable.php:184
-msgid "Already Registered"
-msgstr "Déja inscrit"
-
-#: ../lur-atable.php:203
+#: ../lur-atable.php:206
 msgid "Registration Date"
 msgstr "date d'inscription"
 
-#: ../lur-atable.php:205 ../lur-atable.php:227
+#: ../lur-atable.php:208 ../lur-atable.php:230
 msgid "Unregister"
 msgstr "Se désinscrire"
 
-#: ../lur-atable.php:353 ../widgets/all-users.php:50
+#: ../lur-atable.php:356 ../widgets/all-users.php:50
 msgid "Meals Points"
 msgstr "points repas"
 
-#: ../lur-atable.php:362 ../lur-atable.php:382 ../widgets/all-users.php:59
+#: ../lur-atable.php:365 ../lur-atable.php:385 ../widgets/all-users.php:59
 msgid "No points yet"
 msgstr "Pas encore de points"
 
-#: ../lur-atable.php:362 ../lur-atable.php:382
+#: ../lur-atable.php:365 ../lur-atable.php:385
 #, php-format
 msgid "%d point"
 msgid_plural "%d points"
 msgstr[0] "%d point"
 msgstr[1] "%d points"
 
-#: ../lur-atable.php:374
+#: ../lur-atable.php:377
 msgid "Your meals points"
 msgstr "Tes points repas"
 
-#: ../lur-atable.php:378
+#: ../lur-atable.php:381
 msgid "You have"
 msgstr "Tu as"
 

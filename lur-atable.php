@@ -114,6 +114,9 @@ function lur_add_meals_meta_to_content( $the_content ){
 				'connected_orderby' => 'registration-date',
 			) );
 
+		// Display a title
+		$the_content .= '<h2>'. __('Registration for the meal', 'lur-atable') . '</h2>';
+
 		// Show the nuber of participants
 		$nb_participant_string = '<p>';
 
@@ -156,7 +159,7 @@ function lur_add_meals_meta_to_content( $the_content ){
 						if( count($participants) < $max_participants ){
 							$registration_are_open = true;
 						} else {
-							$registration_display .= __('We are full', 'lur-atable');
+							$registration_display .= '<p>' . __('Meal is full', 'lur-atable') . '</p>';
 						}
 
 					// No number limit of participants, registration are open !
@@ -164,30 +167,30 @@ function lur_add_meals_meta_to_content( $the_content ){
 						$registration_are_open = true;
 					}
 
+					// No registration for the author of the meal
 					if( get_current_user_id() == get_the_author_meta('ID') ){
-						$registration_display .= __('You are the Author', 'lur-atable');
+						$registration_display .= '<p>' .__('You are the author, the author can not subscribe to his own meal', 'lur-atable') . '</p>';
+						$registration_are_open = false;
+					}
+
+					// Check if the users is not alreday register beafore
+					$connection_args = array(
+							'from' => get_the_ID(),
+							'to'   => get_current_user_id()
+						);
+
+					if( p2p_connection_exists( 'repas_registration', $connection_args )){
+						$registration_display .= '<p><strong>' .__('You are already register', 'lur-atable') . '</strong></p>';
 						$registration_are_open = false;
 					}
 
 					// if we can register lets show the registration form
 					if( $registration_are_open ){
 
-						$submit_value = __('Register', 'lur-atable');
-						$disabled = false;
-
-						// Check if the users is not alreday register beafore
-						$connection_args = array(
-								'from' => get_the_ID(),
-								'to'   => get_current_user_id()
-							);
-						if( p2p_connection_exists( 'repas_registration', $connection_args )){
-							$submit_value = __('Already Registered', 'lur-atable');
-							$disabled = true;
-						}
-
 						$registration_display .= '<p><form method="post">';
-						$registration_display .= '<input type="hidden" name="participant_id" value="'. get_current_user_id() .'">';
-						$registration_display .= '<input type="submit" value="'. $submit_value .'" '. disabled( $disabled, true, false ) .'>';
+						$registration_display .= '<input type="hidden" name="participant_id" value="'. get_current_user_id() .'" />';
+						$registration_display .=    __('Tempted', 'lur-atable') . ' ? ';
+						$registration_display .= '<input type="submit" value="▶ '. __('Register', 'lur-atable') .'" />';
 						$registration_display .= '</form></p>';
 					}
 				}
@@ -222,7 +225,7 @@ function lur_add_meals_meta_to_content( $the_content ){
 								<td>';
 									// Propose to unregister for the current user
 									if( get_current_user_id() == $participant->ID ){
-											$registration_display .= '<form method="post">';
+											$registration_display .= '<form method="post" action="'. get_permalink() .'">';
 											$registration_display .=    '<input type="hidden" name="conection_id" value="'. $participant->p2p_id .'">';
 											$registration_display .=    '<input type="submit" value="'. __('Unregister', 'lur-atable') .'" >';
 											$registration_display .= '</form>';
