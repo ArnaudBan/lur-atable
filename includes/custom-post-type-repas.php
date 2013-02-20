@@ -86,8 +86,11 @@ function lur_meals_meta_metabox_content(){
 			<?php _e("Meal Date", 'lur-atable' ); ?>
 		</label>
 		<input type="date" id="lur_meals_date" name="lur_meals_date" value="<?php if( $meal_date ) esc_attr_e( $meal_date ) ?>" />
+		<br />
+		<span class="description">
+			<?php _e('Date format: yyyy-mm-dd (are use Chrome)', 'lur-atable') ?>
+		</span>
 	</p>
-
 	<p>
 		<label for="lur_meals_max_participants">
 			<?php _e("Meal max participants", 'lur-atable' ); ?>

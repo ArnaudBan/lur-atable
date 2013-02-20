@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LUR aTable\n"
-"POT-Creation-Date: 2013-02-20 08:16+0100\n"
-"PO-Revision-Date: 2013-02-20 08:16+0100\n"
+"POT-Creation-Date: 2013-02-20 08:22+0100\n"
+"PO-Revision-Date: 2013-02-20 08:23+0100\n"
 "Last-Translator: \n"
 "Language-Team: LUR\n"
 "MIME-Version: 1.0\n"
@@ -152,15 +152,19 @@ msgstr "Les participants au repas"
 msgid "Meal Date"
 msgstr "Date du repas"
 
-#: ../includes/custom-post-type-repas.php:93
+#: ../includes/custom-post-type-repas.php:91
+msgid "Date format: yyyy-mm-dd (are use Chrome)"
+msgstr "Format: aaaa-mm-jj (ou utiliser Chrome)"
+
+#: ../includes/custom-post-type-repas.php:96
 msgid "Meal max participants"
 msgstr "Nombre max de participants"
 
-#: ../includes/custom-post-type-repas.php:115
+#: ../includes/custom-post-type-repas.php:118
 msgid "Sorry, nobody so far"
 msgstr "Désolé, personne pour le moment"
 
-#: ../includes/custom-post-type-repas.php:117
+#: ../includes/custom-post-type-repas.php:120
 msgid "number of registered"
 msgstr "Nombre d'inscrit"
 
