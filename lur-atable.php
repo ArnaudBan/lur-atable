@@ -194,6 +194,12 @@ function lur_add_meals_meta_to_content( $the_content ){
 						$registration_display .= '</form></p>';
 					}
 				}
+
+			// If user is not log in we sugeste him
+			} else {
+				$registration_display .= '<p>' . __('You have to log in to register', 'lur-atable') . ' : ' .
+																		'<a href="' . wp_login_url() .'" title="'. __('Log in') .'">'. __('Log in') .'</a>' .
+																'</p>';
 			}
 
 			// Any way we show the participants liste
@@ -408,3 +414,12 @@ function lur_meals_orderby_meals_date( $query ) {
 	}
 }
 add_action( 'pre_get_posts', 'lur_meals_orderby_meals_date' );
+
+// Redirect to home page after log in
+function lur_redirect_after_login() {
+	global $redirect_to;
+	if (!isset($_GET['redirect_to'])) {
+		$redirect_to = get_option('siteurl');
+	}
+}
+add_action('login_form', 'lur_redirect_after_login');

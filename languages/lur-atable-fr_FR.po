@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LUR aTable\n"
-"POT-Creation-Date: 2013-02-19 22:26+0100\n"
-"PO-Revision-Date: 2013-02-19 22:27+0100\n"
+"POT-Creation-Date: 2013-02-20 08:16+0100\n"
+"PO-Revision-Date: 2013-02-20 08:16+0100\n"
 "Last-Translator: \n"
 "Language-Team: LUR\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgid_plural "%1$s of %2$s participants maximum"
 msgstr[0] "%1$s participant sur %2$s maximum"
 msgstr[1] "%1$s participants sur %2$s maximum"
 
-#: ../lur-atable.php:131 ../lur-atable.php:207
+#: ../lur-atable.php:131 ../lur-atable.php:213
 msgid "participant"
 msgid_plural "participants"
 msgstr[0] "participant"
@@ -56,34 +56,42 @@ msgstr "Tenté"
 msgid "Register"
 msgstr "S'inscrire"
 
-#: ../lur-atable.php:206
+#: ../lur-atable.php:200
+msgid "You have to log in to register"
+msgstr "Tu dois te connecter pour t'inscrire"
+
+#: ../lur-atable.php:201
+msgid "Log in"
+msgstr ""
+
+#: ../lur-atable.php:212
 msgid "Registration Date"
 msgstr "date d'inscription"
 
-#: ../lur-atable.php:208 ../lur-atable.php:230
+#: ../lur-atable.php:214 ../lur-atable.php:236
 msgid "Unregister"
 msgstr "Se désinscrire"
 
-#: ../lur-atable.php:356 ../widgets/all-users.php:50
+#: ../lur-atable.php:362 ../widgets/all-users.php:50
 msgid "Meals Points"
 msgstr "points repas"
 
-#: ../lur-atable.php:365 ../lur-atable.php:385 ../widgets/all-users.php:59
+#: ../lur-atable.php:371 ../lur-atable.php:391 ../widgets/all-users.php:59
 msgid "No points yet"
 msgstr "Pas encore de points"
 
-#: ../lur-atable.php:365 ../lur-atable.php:385
+#: ../lur-atable.php:371 ../lur-atable.php:391
 #, php-format
 msgid "%d point"
 msgid_plural "%d points"
 msgstr[0] "%d point"
 msgstr[1] "%d points"
 
-#: ../lur-atable.php:377
+#: ../lur-atable.php:383
 msgid "Your meals points"
 msgstr "Tes points repas"
 
-#: ../lur-atable.php:381
+#: ../lur-atable.php:387
 msgid "You have"
 msgstr "Tu as"
 
