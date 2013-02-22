@@ -187,7 +187,7 @@ function lur_add_meals_meta_to_content( $the_content ){
 					// if we can register lets show the registration form
 					if( $registration_are_open ){
 
-						$registration_display .= '<p><form method="post">';
+						$registration_display .= '<p><form method="post" action="'. get_permalink() .'">';
 						$registration_display .= '<input type="hidden" name="participant_id" value="'. get_current_user_id() .'" />';
 						$registration_display .=    __('Tempted', 'lur-atable') . ' ? ';
 						$registration_display .= '<input type="submit" value="▶ '. __('Register', 'lur-atable') .'" />';
