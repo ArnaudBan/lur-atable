@@ -400,7 +400,7 @@ function lur_atable_add_user_profile_fields( $user ){
 // Meals are order by meals date
 function lur_meals_orderby_meals_date( $query ) {
 
-	if ( $query->is_main_query() && is_post_type_archive('meals') ) {
+	if ( $query->is_main_query() && ! is_admin() && is_post_type_archive('meals') ) {
 		// dont display old meals
 		$meta_query = array(
 										'key'     => 'lur_meals_date',
@@ -411,6 +411,11 @@ function lur_meals_orderby_meals_date( $query ) {
 		$query->set( 'orderby', 'meta_value' );
 		$query->set( 'order', 'ASC' );
 		$query->set( 'meta_query', array( $meta_query ) );
+	} elseif( $query->is_main_query() && is_author() ) {
+		$query->set( 'post_type', 'meals' );
+		$query->set( 'meta_key', 'lur_meals_date' );
+		$query->set( 'orderby', 'meta_value' );
+		$query->set( 'order', 'ASC' );
 	}
 }
 add_action( 'pre_get_posts', 'lur_meals_orderby_meals_date' );

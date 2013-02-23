@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LUR aTable\n"
-"POT-Creation-Date: 2013-02-23 21:33+0100\n"
-"PO-Revision-Date: 2013-02-23 21:34+0100\n"
+"POT-Creation-Date: 2013-02-23 23:58+0100\n"
+"PO-Revision-Date: 2013-02-23 23:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: LUR\n"
 "MIME-Version: 1.0\n"
@@ -72,11 +72,11 @@ msgstr "date d'inscription"
 msgid "Unregister"
 msgstr "Se désinscrire"
 
-#: ../lur-atable.php:362 ../widgets/all-users.php:50
+#: ../lur-atable.php:362 ../widgets/all-users.php:56
 msgid "Meals Points"
 msgstr "points repas"
 
-#: ../lur-atable.php:371 ../lur-atable.php:391 ../widgets/all-users.php:59
+#: ../lur-atable.php:371 ../lur-atable.php:391 ../widgets/all-users.php:69
 msgid "No points yet"
 msgstr "Pas encore de points"
 
@@ -215,11 +215,11 @@ msgstr ""
 msgid "related"
 msgstr ""
 
-#: ../p2p-core/side.php:227 ../widgets/all-users.php:98
+#: ../p2p-core/side.php:227 ../widgets/all-users.php:108
 msgid "Users"
 msgstr "Participants"
 
-#: ../p2p-core/side.php:236 ../widgets/all-users.php:49
+#: ../p2p-core/side.php:236 ../widgets/all-users.php:55
 msgid "User"
 msgstr "Participant"
 
@@ -256,7 +256,12 @@ msgstr "aTable Tous les participants"
 msgid "Display all the users and their meals points"
 msgstr "Affiche tout les participants et leur points repas"
 
-#: ../widgets/all-users.php:102 ../widgets/next-meals.php:113
+#: ../widgets/all-users.php:65
+#, php-format
+msgid "All %s's meal"
+msgstr "Tout les repas de %s"
+
+#: ../widgets/all-users.php:112 ../widgets/next-meals.php:113
 msgid "Title"
 msgstr "Titre"
 

@@ -61,7 +61,11 @@ class Lur_All_Users_Widget extends WP_Widget {
 					foreach( $all_users as $user ){
 						?>
 						<tr>
-							<td><?php echo $user->display_name; ?></td>
+							<td>
+								<a href="<?php echo get_author_posts_url( $user->ID); ?>" title="<?php printf(__('All %s\'s meal', 'lur-atable'), $user->display_name ) ?>">
+									<?php echo $user->display_name; ?>
+								</a>
+							</td>
 							<td><?php echo isset( $user->lur_meals_points) ? $user->lur_meals_points : __( 'No points yet', 'lur-atable'); ?></td>
 						</tr>
 						<?php
