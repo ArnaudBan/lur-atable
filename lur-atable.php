@@ -264,7 +264,7 @@ add_filter('the_content', 'lur_add_meals_meta_to_content' );
 function lur_add_meals_date( $the_title ){
 	global $post;
 
-	if( !is_admin() && !empty( $post ) && $the_title == $post->post_title && get_post_type() == 'meals' ){
+	if( !is_admin() && !empty( $post ) && sanitize_title($the_title) == sanitize_title($post->post_title) && get_post_type() == 'meals' ){
 
 		$date_repas = get_post_meta( get_the_ID(), 'lur_meals_date', true);
 
