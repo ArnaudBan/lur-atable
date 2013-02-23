@@ -41,6 +41,12 @@ class Lur_All_Users_Widget extends WP_Widget {
 										'fields'   => 'all_with_meta',
 									));
 
+		usort($all_users, function($a, $b){
+			if( $a->lur_meals_points == $b->lur_meals_points ) return 0;
+			return( $a->lur_meals_points > $b->lur_meals_points ) ? -1 : 1;
+		})
+
+
 		?>
 		<div class="entry-content">
 			<table>
