@@ -140,16 +140,64 @@ function lur_meals_meta_metabox_save_postdata( $post_id ) {
 		// Check permissions
 		if ( current_user_can( 'edit_page', $post_id ) ){
 
-			//update post meta
+			// save max participants
 			if( is_numeric( $_POST['lur_meals_max_participants'] ) )
 				update_post_meta($post_id, 'lur_meals_max_participants', $_POST['lur_meals_max_participants']);
 
-			//if photo id is numeric get sizes from flickr
+			// check and save the date
 			list($yy,$mm,$dd)= explode("-", $_POST['lur_meals_date']);
 			if (is_numeric($yy) && is_numeric($mm) && is_numeric($dd) && checkdate($mm,$dd,$yy) ) {
 				update_post_meta($post_id, 'lur_meals_date', $_POST['lur_meals_date']);
 			}
+			// if everything is ok, send a mail
 		}
 	}
 }
 add_action( 'save_post', 'lur_meals_meta_metabox_save_postdata' );
+
+function lur_send_mail_for_new_publish_meal( $new_statut, $old_statut, $post ){
+
+	if( $new_statut == 'publish' ){
+
+		$is_creat_mail_send = get_post_meta($post->ID, 'lur_send_mail', true);
+
+		// If the mail as not been send
+		if( $is_creat_mail_send != 'yes' ){
+
+			setup_postdata($post);
+
+			// On envoie un mail
+			$all_user = get_users();
+			$all_users_mail = array();
+			foreach( $all_user as $user ){
+				$all_users_mail[] = $user->user_email;
+			}
+			$to = $all_users_mail;
+			$subject = sprintf( __('New Meal on %s', 'lur-atable'), get_bloginfo( 'name' ) );
+
+			// The message
+			$message = __('Yeah a new meal', 'lur-atable') . ' !'. "\r\n";
+			$message .= "\r\n";
+			$message .= sprintf( __('%s proposes a meal', 'lur-atable'), get_the_author() );
+
+			// If there is a date wee print it
+			$meal_date = get_post_meta(get_the_ID(), 'lur_meals_date', true);
+			if( $meal_date )
+				$message .= sprintf( __(' on %s', 'lur-atable'), mysql2date( get_option('date_format'), $meal_date ) ) . "\r\n";
+
+			$message .= "\r\n";
+			$message .= get_the_title() . "\r\n";
+			$message .= get_the_content() . "\r\n";
+			$message .= "\r\n";
+			$message .= __('Tempted', 'lur-atable') . ' ? ' . get_permalink();
+
+			$headers = 'From: ArnaudBan - LUR aTable <arnaud@cnsx.fr>' . "\r\n";
+			wp_mail($to, $subject, $message, $headers);
+
+			wp_reset_postdata();
+
+			update_post_meta($post->ID, 'lur_send_mail', 'yes');
+		}
+	}
+}
+add_action('transition_post_status', 'lur_send_mail_for_new_publish_meal', 10, 3);

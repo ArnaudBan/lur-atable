@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LUR aTable\n"
-"POT-Creation-Date: 2013-02-20 08:22+0100\n"
-"PO-Revision-Date: 2013-02-20 08:23+0100\n"
+"POT-Creation-Date: 2013-02-23 21:33+0100\n"
+"PO-Revision-Date: 2013-02-23 21:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: LUR\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgstr "Tu es l'auteur, l'auteur ne peut s'inscrire a son propre repas"
 msgid "You are already register"
 msgstr "Tu es déja inscrit"
 
-#: ../lur-atable.php:192
+#: ../lur-atable.php:192 ../includes/custom-post-type-repas.php:192
 msgid "Tempted"
 msgstr "Tenté"
 
@@ -167,6 +167,25 @@ msgstr "Désolé, personne pour le moment"
 #: ../includes/custom-post-type-repas.php:120
 msgid "number of registered"
 msgstr "Nombre d'inscrit"
+
+#: ../includes/custom-post-type-repas.php:176
+#, php-format
+msgid "New Meal on %s"
+msgstr "Nouveau repas sur %s"
+
+#: ../includes/custom-post-type-repas.php:179
+msgid "Yeah a new meal"
+msgstr "Ouais un nouveau repas"
+
+#: ../includes/custom-post-type-repas.php:181
+#, php-format
+msgid "%s proposes a meal"
+msgstr "%s propose un repas"
+
+#: ../includes/custom-post-type-repas.php:186
+#, php-format
+msgid " on %s"
+msgstr " le %s"
 
 #: ../p2p-core/extra.php:16
 msgid "Posts 2 Posts"
