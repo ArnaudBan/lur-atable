@@ -145,7 +145,8 @@ function lur_add_meals_meta_to_content( $the_content ){
 
 				// If the date is to close or past, the registration are close
 				$today = new DateTime('now');
-				if( $today > $date_repas->modify(' -1 day') ){
+				$is_old_meal = $today > $date_repas->modify(' -1 day');
+				if( $is_old_meal ){
 
 					$registration_display .= '<p>' . __('Registration are closed', 'lur-atable') . '</p>';
 
@@ -210,9 +211,13 @@ function lur_add_meals_meta_to_content( $the_content ){
 					<thead>
 						<tr>
 							<th>'. __('Registration Date', 'lur-atable') .'</th>
-							<th>'. __('participant', 'lur-atable') .'</th>
-							<th>'. __('Unregister', 'lur-atable') .'</th>
-						</tr>
+							<th>'. __('participant', 'lur-atable') .'</th>';
+							if( ! $is_old_meal){
+
+							$registration_display .= '<th>'. __('Unregister', 'lur-atable') .'</th>';
+							}
+							$registration_display .=
+						'</tr>
 					</thead>
 					<tbody>';
 
@@ -227,8 +232,11 @@ function lur_add_meals_meta_to_content( $the_content ){
 								}
 								$registration_display .= '
 								</td>
-								<td>' .$participant->display_name .'</td>
-								<td>';
+								<td>' .$participant->display_name .'</td>';
+								if( ! $is_old_meal){
+
+								$registration_display .=
+								'<td>';
 									// Propose to unregister for the current user
 									if( get_current_user_id() == $participant->ID ){
 											$registration_display .= '<form method="post" action="'. get_permalink() .'">';
@@ -237,8 +245,10 @@ function lur_add_meals_meta_to_content( $the_content ){
 											$registration_display .= '</form>';
 									}
 								$registration_display .= '
-								</td>
-							</tr>';
+								</td>';
+								}
+								$registration_display .=
+							'</tr>';
 						}
 						$registration_display .= '
 					</tbody>
@@ -397,20 +407,40 @@ function lur_atable_add_user_profile_fields( $user ){
 	<?php
 }
 
-// Meals are order by meals date
+//Add query var
+function lur_atable_add_query_var($public_query_vars) {
+
+	$public_query_vars[] = "old_meal";
+	return $public_query_vars;
+}
+add_filter('query_vars', 'lur_atable_add_query_var');
+
+// Modification of the default query
 function lur_meals_orderby_meals_date( $query ) {
 
+	// Meal are order by meal date
 	if ( $query->is_main_query() && ! is_admin() && is_post_type_archive('meals') ) {
-		// dont display old meals
+
+		// Show old meal are new one
+		if( get_query_var('old_meal') == 'show' ){
+			$compare_meal = '<';
+			$order_meal = 'DESC';
+		} else {
+			$compare_meal = '>=';
+			$order_meal = 'ASC';
+		}
+
 		$meta_query = array(
 										'key'     => 'lur_meals_date',
 										'value'   => date('Y-m-d'),
-										'compare' => '>=',
+										'compare' => $compare_meal,
 									);
 		$query->set( 'meta_key', 'lur_meals_date' );
 		$query->set( 'orderby', 'meta_value' );
-		$query->set( 'order', 'ASC' );
+		$query->set( 'order', $order_meal );
 		$query->set( 'meta_query', array( $meta_query ) );
+
+	// The author page show meals not post
 	} elseif( $query->is_main_query() && is_author() ) {
 		$query->set( 'post_type', 'meals' );
 		$query->set( 'meta_key', 'lur_meals_date' );

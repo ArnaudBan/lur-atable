@@ -30,7 +30,7 @@ function lur_add_cpt_meals(){
 		'show_ui'              => true,
 		'show_in_menu'         => true,
 		'query_var'            => true,
-		'rewrite'              => array( 'slug' => 'meals' ),
+		'rewrite'              => array( 'slug' => __('meals', 'lur-atable' ) ),
 		'capability_type'      => 'post',
 		'has_archive'          => true,
 		'hierarchical'         => false,
@@ -40,6 +40,8 @@ function lur_add_cpt_meals(){
 	);
 
 	register_post_type( 'meals', $meals_args );
+
+	add_rewrite_rule( __('meals', 'lur-atable' ).'/' . __('old', 'lur-atable') .'/?$', 'index.php?post_type=meals&old_meal=show', 'top');
 }
 
 add_action('init', 'lur_add_cpt_meals');
@@ -157,7 +159,7 @@ add_action( 'save_post', 'lur_meals_meta_metabox_save_postdata' );
 
 function lur_send_mail_for_new_publish_meal( $new_statut, $old_statut, $post ){
 
-	if( $new_statut == 'publish' ){
+	if( $post->post_type == 'meal' && $new_statut == 'publish' ){
 
 		$is_creat_mail_send = get_post_meta($post->ID, 'lur_send_mail', true);
 
