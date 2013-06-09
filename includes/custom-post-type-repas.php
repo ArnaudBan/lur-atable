@@ -151,7 +151,7 @@ function lur_meals_meta_metabox_save_postdata( $post_id ) {
 			if (is_numeric($yy) && is_numeric($mm) && is_numeric($dd) && checkdate($mm,$dd,$yy) ) {
 				update_post_meta($post_id, 'lur_meals_date', $_POST['lur_meals_date']);
 			}
-			// if everything is ok, send a mail
+
 		}
 	}
 }
@@ -159,7 +159,8 @@ add_action( 'save_post', 'lur_meals_meta_metabox_save_postdata' );
 
 function lur_send_mail_for_new_publish_meal( $new_statut, $old_statut, $post ){
 
-	if( $post->post_type == 'meal' && $new_statut == 'publish' ){
+
+	if( $post->post_type == 'meals' && $new_statut == 'publish' ){
 
 		$is_creat_mail_send = get_post_meta($post->ID, 'lur_send_mail', true);
 
