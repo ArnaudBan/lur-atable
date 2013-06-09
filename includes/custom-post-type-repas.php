@@ -41,7 +41,6 @@ function lur_add_cpt_meals(){
 
 	register_post_type( 'meals', $meals_args );
 
-	add_rewrite_rule( __('meals', 'lur-atable' ).'/' . __('old', 'lur-atable') .'/?$', 'index.php?post_type=meals&old_meal=show', 'top');
 }
 
 add_action('init', 'lur_add_cpt_meals');

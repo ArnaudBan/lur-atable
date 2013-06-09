@@ -415,6 +415,14 @@ function lur_atable_add_query_var($public_query_vars) {
 }
 add_filter('query_vars', 'lur_atable_add_query_var');
 
+// Add rewrite rules
+function lur_atable_add_rewrite_rules(){
+
+	add_rewrite_rule( __('meals', 'lur-atable' ).'/' . __('old', 'lur-atable') .'/?$', 'index.php?post_type=meals&old_meal=show', 'top');
+	add_rewrite_rule( __('meals', 'lur-atable' ).'/' . __('old', 'lur-atable') .'/page/([0-9]{1,})/?$', 'index.php?post_type=meals&old_meal=show&paged=$matches[1]', 'top');
+}
+add_action('init', 'lur_atable_add_rewrite_rules');
+
 // Modification of the default query
 function lur_meals_orderby_meals_date( $query ) {
 
