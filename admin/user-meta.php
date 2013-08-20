@@ -34,6 +34,7 @@ add_action( 'show_user_profile', 'lur_atable_add_user_profile_fields' );
 function lur_atable_add_user_profile_fields( $user ){
   $meal_points = get_user_meta( $user->ID , 'lur_meals_points', true);
   $meals_participate = get_user_meta( $user->ID , 'lur_meals_participate', true);
+  $meals_mail = get_user_meta( $user->ID , 'lur_meals_mail', true);
   ?>
   <h3><?php _e('Meals', 'lur-atable'); ?></h3>
   <table class="form-table">
@@ -54,6 +55,13 @@ function lur_atable_add_user_profile_fields( $user ){
           <label for="lur_meals_participate"><?php _e('I check, I participate', 'lur-atable'); ?></label>
         </td>
       </tr>
+      <tr>
+        <th><?php _e('Meals\'s mail', 'lur-atable'); ?> :</th>
+        <td>
+          <input type="checkbox" value="true" name="lur_meals_mail" id="lur_meals_mail" <?php checked( 'true', $meals_mail, true ); ?>/>
+          <label for="lur_meals_mail"><?php _e('I check, I get mail when there are new meals', 'lur-atable'); ?></label>
+        </td>
+      </tr>
     </tbody>
   </table>
   <?php
@@ -69,5 +77,11 @@ function lud_update_meals_user_meta($user_id) {
       update_user_meta($user_id, 'lur_meals_participate', 'true');
     else
       delete_user_meta( $user_id, 'lur_meals_participate', 'true');
+  }
+  if ( current_user_can('edit_user',$user_id) ){
+    if( isset( $_POST['lur_meals_mail'] ) && $_POST['lur_meals_mail'] == 'true' )
+      update_user_meta($user_id, 'lur_meals_mail', 'true');
+    else
+      delete_user_meta( $user_id, 'lur_meals_mail', 'true');
   }
 }

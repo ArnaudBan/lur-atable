@@ -169,7 +169,11 @@ function lur_send_mail_for_new_publish_meal( $new_statut, $old_statut, $post ){
 			setup_postdata($post);
 
 			// On envoie un mail
-			$all_user = get_users();
+			$all_user = get_users( array(
+					'meta_key'		=> 'lur_meals_mail',
+					'meta_value'	=> 'true',
+					)
+				);
 			$all_users_mail = array();
 			foreach( $all_user as $user ){
 				$all_users_mail[] = $user->user_email;
@@ -193,7 +197,7 @@ function lur_send_mail_for_new_publish_meal( $new_statut, $old_statut, $post ){
 			$message .= "\r\n";
 			$message .= __('Tempted', 'lur-atable') . ' ? ' . get_permalink();
 
-			$headers = 'From: ArnaudBan - LUR aTable <arnaud@cnsx.fr>' . "\r\n";
+			$headers = 'From: ArnaudBan - VoxPop <abanvillet@eluere.com>' . "\r\n";
 			wp_mail($to, $subject, $message, $headers);
 
 			wp_reset_postdata();
