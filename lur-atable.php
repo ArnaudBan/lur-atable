@@ -92,7 +92,7 @@ function example_connection_types() {
 function lur_add_meals_meta_to_content( $the_content ){
 	global $post;
 
-	if( get_post_type() == 'meals' ){
+	if( get_post_type() == 'meals' && is_single() ){
 
 		// Deal with registration and unregistration if there is a need to
 		if( isset( $_REQUEST['participant_id'] ) ){
@@ -100,6 +100,7 @@ function lur_add_meals_meta_to_content( $the_content ){
 		} elseif( isset( $_REQUEST['conection_id'] ) ){
 			unregister_to_meal( $_REQUEST['conection_id'] );
 		}
+
 		// Get the date
 		$date_repas = get_post_meta( get_the_ID(), 'lur_meals_date', true);
 		$date_repas = new DateTime( $date_repas );
