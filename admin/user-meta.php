@@ -18,9 +18,13 @@ function lur_atable_add_users_columns($column_headers) {
 function custom_manage_users_custom_column($custom_column,$column_name,$user_id) {
   if ($column_name =='lur_meals_points') {
     $meal_points = get_user_meta( $user_id , 'lur_meals_points', true);
+    $meals_participate = get_user_meta( $user_id , 'lur_meals_participate', true);
     $meal_points_count = $meal_points == 0 ? 1 : $meal_points;
 
-    $custom_column = ( $meal_points == '' ) ? __( 'No points yet', 'lur-atable') : sprintf( _n('%d point', '%d points', $meal_points_count,'lur-atable'), $meal_points);
+    if( $meals_participate && $meals_participate == 'true')
+      $custom_column = ( $meal_points == '' ) ? __( 'No points yet', 'lur-atable') : sprintf( _n('%d point', '%d points', $meal_points_count,'lur-atable'), $meal_points);
+    else
+      $custom_column = __('Don\'t participate', 'lur-atable');
   }
   return $custom_column;
 }
