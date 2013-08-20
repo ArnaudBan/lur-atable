@@ -28,6 +28,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // Add a CPT
 require_once plugin_dir_path(__FILE__) . 'includes/custom-post-type-repas.php';
 
+// Modify user admin page and add user meta
+require_once plugin_dir_path(__FILE__) . 'admin/user-meta.php';
+
 
 // translate the plugin
 load_plugin_textdomain('lur-atable', false, 'lur-atable/languages' );
@@ -92,7 +95,11 @@ function example_connection_types() {
 function lur_add_meals_meta_to_content( $the_content ){
 	global $post;
 
-	if( get_post_type() == 'meals' && is_single() ){
+	$current_user_participate = get_user_meta( get_current_user_id(), 'lur_meals_participate', true );
+	$current_user_participate =  ( $current_user_participate && $current_user_participate == 'true') ? true : false;
+
+
+	if( get_post_type() == 'meals' && is_single() && $current_user_participate ){
 
 		// Deal with registration and unregistration if there is a need to
 		if( isset( $_REQUEST['participant_id'] ) ){
@@ -363,50 +370,6 @@ function unregister_to_meal( $conection_id ){
 	p2p_delete_connection( $conection_id );
 }
 
-/**
- * Add Meals point in the user column
- */
-add_action('manage_users_columns','lur_atable_add_users_columns');
-add_action('manage_users_custom_column','custom_manage_users_custom_column',10,3);
-
-function lur_atable_add_users_columns($column_headers) {
-	$column_headers['lur_meals_points'] = __( 'Meals Points', 'lur-atable');
-	return $column_headers;
-}
-
-function custom_manage_users_custom_column($custom_column,$column_name,$user_id) {
-	if ($column_name =='lur_meals_points') {
-		$meal_points = get_user_meta( $user_id , 'lur_meals_points', true);
-		$meal_points_count = $meal_points == 0 ? 1 : $meal_points;
-
-		$custom_column = ( $meal_points == '' ) ? __( 'No points yet', 'lur-atable') : sprintf( _n('%d point', '%d points', $meal_points_count,'lur-atable'), $meal_points);
-	}
-	return $custom_column;
-}
-
-/*
- *  Add Meals points to the user profil
- */
-add_action( 'show_user_profile', 'lur_atable_add_user_profile_fields' );
-function lur_atable_add_user_profile_fields( $user ){
-	$meal_points = get_user_meta( $user->ID , 'lur_meals_points', true);
-	?>
-	<h3><?php _e('Your meals points', 'lur-atable'); ?></h3>
-	<table class="form-table">
-		<tbody>
-			<tr>
-				<th><?php _e('You have', 'lur-atable'); ?> :</th>
-				<td>
-					<?php
-					$meal_points_count = $meal_points == 0 ? 1 : $meal_points;
-					echo ( $meal_points == '' ) ? __( 'No points yet', 'lur-atable') : sprintf( _n('%d point', '%d points', $meal_points_count,'lur-atable'), $meal_points);
-					?>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<?php
-}
 
 //Add query var
 function lur_atable_add_query_var($public_query_vars) {

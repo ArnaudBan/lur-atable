@@ -38,7 +38,10 @@ class Lur_All_Users_Widget extends WP_Widget {
 			echo $before_title . $title . $after_title;
 
 		$all_users = get_users( array(
-										'fields'   => 'all_with_meta',
+										'fields'   		=> 'all_with_meta',
+										'meta_key'		=> 'lur_meals_participate',
+										'meta_value'	=> 'true',
+										'meta_compare'=> '='
 									));
 
 		usort($all_users, function($a, $b){
