@@ -458,12 +458,3 @@ function lur_meals_orderby_meals_date( $query ) {
 	}
 }
 add_action( 'pre_get_posts', 'lur_meals_orderby_meals_date' );
-
-// Redirect to home page after log in
-function lur_redirect_after_login() {
-	global $redirect_to;
-	if (!isset($_GET['redirect_to'])) {
-		$redirect_to = get_option('siteurl');
-	}
-}
-add_action('login_form', 'lur_redirect_after_login');
