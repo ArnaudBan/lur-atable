@@ -415,9 +415,6 @@ function lur_meals_orderby_meals_date( $query ) {
 	// The author page show meals not post
 	} elseif( $query->is_main_query() && is_author() ) {
 		$query->set( 'post_type',  array( 'post', 'meals' ) );
-		$query->set( 'meta_key', 'lur_meals_date' );
-		$query->set( 'orderby', 'meta_value' );
-		$query->set( 'order', 'ASC' );
 	}
 }
 add_action( 'pre_get_posts', 'lur_meals_orderby_meals_date' );
