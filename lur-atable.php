@@ -430,7 +430,7 @@ function lur_meals_orderby_meals_date( $query ) {
 	// Meal are order by meal date
 	if ( $query->is_main_query() && ! is_admin() && is_post_type_archive('meals') ) {
 
-		// Show old meal are new one
+		// Show old meal or new one
 		if( get_query_var('old_meal') == 'show' ){
 			$compare_meal = '<';
 			$order_meal = 'DESC';
@@ -451,7 +451,7 @@ function lur_meals_orderby_meals_date( $query ) {
 
 	// The author page show meals not post
 	} elseif( $query->is_main_query() && is_author() ) {
-		$query->set( 'post_type', 'meals' );
+		$query->set( 'post_type',  array( 'post', 'meals' ) );
 		$query->set( 'meta_key', 'lur_meals_date' );
 		$query->set( 'orderby', 'meta_value' );
 		$query->set( 'order', 'ASC' );
