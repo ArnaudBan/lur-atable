@@ -153,7 +153,7 @@ function lur_add_meals_meta_to_content( $the_content ){
 
 				// If the date is to close or past, the registration are close
 				$today = new DateTime('now');
-				$is_old_meal = $today > $date_repas->modify(' -1 day');
+				$is_old_meal = $today >= $date_repas;
 				if( $is_old_meal ){
 
 					$registration_display .= '<p>' . __('Registration are closed', 'lur-atable') . '</p>';
