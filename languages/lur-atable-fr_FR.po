@@ -1,104 +1,132 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: LUR aTable\n"
-"POT-Creation-Date: 2013-03-04 21:11+0100\n"
-"PO-Revision-Date: 2013-03-04 21:11+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2013-09-14 14:38+0100\n"
+"PO-Revision-Date: 2013-09-14 14:40+0100\n"
+"Last-Translator: Arnaud Banvillet <arnaud.banvillet@gmail.com>\n"
 "Language-Team: LUR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.5.7\n"
 "X-Poedit-KeywordsList: __;_e;_x;_n:1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../lur-atable.php:118
+#: ../lur-atable.php:126
 msgid "Registration for the meal"
 msgstr "Les inscriptions au repas"
 
-#: ../lur-atable.php:126
+#: ../lur-atable.php:134
 #, php-format
 msgid "%1$s of %2$s participant maximum"
 msgid_plural "%1$s of %2$s participants maximum"
 msgstr[0] "%1$s participant sur %2$s maximum"
 msgstr[1] "%1$s participants sur %2$s maximum"
 
-#: ../lur-atable.php:131 ../lur-atable.php:213
+#: ../lur-atable.php:139 ../lur-atable.php:222
 msgid "participant"
 msgid_plural "participants"
 msgstr[0] "participant"
 msgstr[1] "participants"
 
-#: ../lur-atable.php:150
+#: ../lur-atable.php:159
 msgid "Registration are closed"
 msgstr "Les inscriptions sont closes"
 
-#: ../lur-atable.php:162
+#: ../lur-atable.php:171
 msgid "Meal is full"
 msgstr "Les repas est complet"
 
-#: ../lur-atable.php:172
+#: ../lur-atable.php:181
 msgid "You are the author, the author can not subscribe to his own meal"
 msgstr "Tu es l'auteur, l'auteur ne peut s'inscrire a son propre repas"
 
-#: ../lur-atable.php:183
+#: ../lur-atable.php:192
 msgid "You are already register"
 msgstr "Tu es déja inscrit"
 
-#: ../lur-atable.php:192 ../includes/custom-post-type-repas.php:194
+#: ../lur-atable.php:201 ../includes/custom-post-type-repas.php:198
 msgid "Tempted"
 msgstr "Tenté"
 
-#: ../lur-atable.php:193
+#: ../lur-atable.php:202
 msgid "Register"
 msgstr "S'inscrire"
 
-#: ../lur-atable.php:200
+#: ../lur-atable.php:209
 msgid "You have to log in to register"
 msgstr "Tu dois te connecter pour t'inscrire"
 
-#: ../lur-atable.php:201
+#: ../lur-atable.php:210
 msgid "Log in"
 msgstr ""
 
-#: ../lur-atable.php:212
+#: ../lur-atable.php:221
 msgid "Registration Date"
 msgstr "date d'inscription"
 
-#: ../lur-atable.php:214 ../lur-atable.php:236
+#: ../lur-atable.php:225 ../lur-atable.php:252
 msgid "Unregister"
 msgstr "Se désinscrire"
 
-#: ../lur-atable.php:362 ../widgets/all-users.php:56
+#: ../lur-atable.php:385 ../lur-atable.php:386
+#: ../includes/custom-post-type-repas.php:33
+msgid "meals"
+msgstr "repas"
+
+#: ../lur-atable.php:385 ../lur-atable.php:386
+msgid "old"
+msgstr "anciens"
+
+#: ../admin/user-meta.php:14 ../widgets/all-users.php:59
 msgid "Meals Points"
 msgstr "points repas"
 
-#: ../lur-atable.php:371 ../lur-atable.php:391 ../widgets/all-users.php:69
+#: ../admin/user-meta.php:25 ../admin/user-meta.php:51
+#: ../widgets/all-users.php:72
 msgid "No points yet"
 msgstr "Pas encore de points"
 
-#: ../lur-atable.php:371 ../lur-atable.php:391
+#: ../admin/user-meta.php:25 ../admin/user-meta.php:51
 #, php-format
 msgid "%d point"
 msgid_plural "%d points"
 msgstr[0] "%d point"
 msgstr[1] "%d points"
 
-#: ../lur-atable.php:383
-msgid "Your meals points"
-msgstr "Tes points repas"
+#: ../admin/user-meta.php:27
+#, fuzzy
+msgid "Don't participate"
+msgstr "participant"
 
-#: ../lur-atable.php:387
-msgid "You have"
-msgstr "Tu as"
-
-#: ../includes/custom-post-type-repas.php:13
+#: ../admin/user-meta.php:43 ../includes/custom-post-type-repas.php:13
 #: ../includes/custom-post-type-repas.php:24
 msgid "Meals"
 msgstr "Repas"
+
+#: ../admin/user-meta.php:47
+msgid "Your meals points"
+msgstr "Tes points repas"
+
+#: ../admin/user-meta.php:56
+msgid "Participate in meals"
+msgstr ""
+
+#: ../admin/user-meta.php:59
+msgid "I check, I participate"
+msgstr "Je coche, je participe"
+
+#: ../admin/user-meta.php:63
+#, fuzzy
+msgid "Meals's mail"
+msgstr "Tout les repas de %s"
+
+#: ../admin/user-meta.php:66
+msgid "I check, I get mail when there are new meals"
+msgstr "Je coche, je recois un mail lors de la publication de nouveaux repas"
 
 #: ../includes/custom-post-type-repas.php:14
 msgid "Meal"
@@ -140,58 +168,49 @@ msgstr "Aucun repas trouvé"
 msgid "No Meal found in trash"
 msgstr "Aucun repas trouvé dans la corbeille"
 
-#: ../includes/custom-post-type-repas.php:33
-#: ../includes/custom-post-type-repas.php:44
-msgid "meals"
-msgstr "repas"
-
-#: ../includes/custom-post-type-repas.php:44
-msgid "old"
-msgstr "anciens"
-
-#: ../includes/custom-post-type-repas.php:56
+#: ../includes/custom-post-type-repas.php:55
 msgid "Meal informations"
 msgstr "Information sur le repas"
 
-#: ../includes/custom-post-type-repas.php:65
+#: ../includes/custom-post-type-repas.php:64
 msgid "Meal participants"
 msgstr "Les participants au repas"
 
-#: ../includes/custom-post-type-repas.php:88
+#: ../includes/custom-post-type-repas.php:87
 msgid "Meal Date"
 msgstr "Date du repas"
 
-#: ../includes/custom-post-type-repas.php:93
+#: ../includes/custom-post-type-repas.php:92
 msgid "Date format: yyyy-mm-dd (are use Chrome)"
 msgstr "Format: aaaa-mm-jj (ou utiliser Chrome)"
 
-#: ../includes/custom-post-type-repas.php:98
+#: ../includes/custom-post-type-repas.php:97
 msgid "Meal max participants"
 msgstr "Nombre max de participants"
 
-#: ../includes/custom-post-type-repas.php:120
+#: ../includes/custom-post-type-repas.php:119
 msgid "Sorry, nobody so far"
 msgstr "Désolé, personne pour le moment"
 
-#: ../includes/custom-post-type-repas.php:122
+#: ../includes/custom-post-type-repas.php:121
 msgid "number of registered"
 msgstr "Nombre d'inscrit"
 
-#: ../includes/custom-post-type-repas.php:178
+#: ../includes/custom-post-type-repas.php:182
 #, php-format
 msgid "New Meal on %s"
 msgstr "Nouveau repas sur %s"
 
-#: ../includes/custom-post-type-repas.php:181
+#: ../includes/custom-post-type-repas.php:185
 msgid "Yeah a new meal"
 msgstr "Ouais un nouveau repas"
 
-#: ../includes/custom-post-type-repas.php:183
+#: ../includes/custom-post-type-repas.php:187
 #, php-format
 msgid "%s proposes a meal"
 msgstr "%s propose un repas"
 
-#: ../includes/custom-post-type-repas.php:188
+#: ../includes/custom-post-type-repas.php:192
 #, php-format
 msgid " on %s"
 msgstr " le %s"
@@ -224,11 +243,11 @@ msgstr ""
 msgid "related"
 msgstr ""
 
-#: ../p2p-core/side.php:227 ../widgets/all-users.php:108
+#: ../p2p-core/side.php:227 ../widgets/all-users.php:111
 msgid "Users"
 msgstr "Participants"
 
-#: ../p2p-core/side.php:236 ../widgets/all-users.php:55
+#: ../p2p-core/side.php:236 ../widgets/all-users.php:58
 msgid "User"
 msgstr "Participant"
 
@@ -265,12 +284,12 @@ msgstr "aTable Tous les participants"
 msgid "Display all the users and their meals points"
 msgstr "Affiche tout les participants et leur points repas"
 
-#: ../widgets/all-users.php:65
+#: ../widgets/all-users.php:68
 #, php-format
 msgid "All %s's meal"
 msgstr "Tout les repas de %s"
 
-#: ../widgets/all-users.php:112 ../widgets/next-meals.php:113
+#: ../widgets/all-users.php:115 ../widgets/next-meals.php:113
 msgid "Title"
 msgstr "Titre"
 
@@ -290,10 +309,8 @@ msgstr "Prochains Repas"
 msgid "Number of meals to display"
 msgstr "Nombre de repas à afficher"
 
-#~ msgid "Only one participant"
-#~ msgid_plural "%d participants so far"
-#~ msgstr[0] "Seulement un inscrit"
-#~ msgstr[1] "%d participants pour le moment"
+#~ msgid "You have"
+#~ msgstr "Tu as"
 
 #~ msgid "No on yet"
 #~ msgstr "Personne pour le moment"
